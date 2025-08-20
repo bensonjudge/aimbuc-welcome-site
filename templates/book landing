@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ndola Retailer's Guide: Master Your Products, Master Your Profits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .header {
+            background-color: #004d40;
+            color: #fff;
+            text-align: center;
+            padding: 2rem 1rem;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .section {
+            background-color: #fff;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #004d40;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+        }
+        .cta {
+            text-align: center;
+            background-color: #ff9800;
+            color: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+        .cta a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: #e65100;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            margin-top: 1rem;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .cta a:hover {
+            background-color: #bf360c;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23004d40" width="18px" height="18px"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat left center;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Your Business, Your Control.</h1>
+        <p>A Practical Guide to Mastering Product Management for Small Businesses in Ndola, Zambia.</p>
+    </div>
+
+    <div class="container">
+        <div class="section">
+            <h2>From Confusion to Control: Unlock Your Store's True Potential</h2>
+            <p>Are you a small business owner in Ndola struggling with stock management, pricing, and unpredictable profits? Our guide, **The Ndola Retailer's Guide**, is your hands-on manual to turn chaos into a streamlined, profitable system. We walk you through every critical step of the product lifecycle, from the moment a product enters your door to the second it's sold.</p>
+        </div>
+
+        <div class="section">
+            <h2>Inside the Book: What You'll Learn</h2>
+            <p>We break down essential concepts into easy-to-follow, actionable steps, showing you exactly how to implement them for immediate results. Inside, you'll discover how to:</p>
+            <ul>
+                <li>**Receive Products Like a Pro:** Learn how to check for quality, verify quantities, and manage expiries to prevent financial loss from the start.</li>
+                <li>**Master Your Inventory with a Simple Excel File:** Discover how to build a powerful "Product Receipt and Price Adjustment File" that automatically tracks stock, calculates costs, and flags necessary price changes.</li>
+                <li>**Price for Profit, Not Just to Compete:** Understand the secrets of markup and how to set prices that cover your costs, account for expenses, and guarantee a healthy profit margin.</li>
+                <li>**Organize for Success:** Get practical advice on how to handle storage and shelving to eliminate stock discrepancies, reduce waste, and improve product visibility.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Why This Book is Different</h2>
+            <p>This isn't just theory. It's a practical, step-by-step guide designed specifically for the unique challenges of the Zambian retail environment. We use real-world examples (like Rufedol and bottled water) to make complex concepts simple and applicable to your daily operations. This guide is your new operational command center—a reliable lens through which to manage product flow, profitability, and business sustainability.</p>
+        </div>
+        
+        <div class="cta">
+            <p>Ready to take control of your stock and your bottom line?</p>
+            <a href="#">Buy Now</a>
+            <p style="font-size: 0.9rem; margin: 0.5rem 0 0;">(Link coming soon!)</p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 The Ndola Retailer's Guide. All Rights Reserved.</p>
+    </div>
+
+</body>
+</html>
