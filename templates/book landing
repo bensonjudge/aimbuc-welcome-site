@@ -3,120 +3,444 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Ndola Retailer's Guide: Master Your Products, Master Your Profits</title>
+    <title>Product Management for Small & Medium Retail Stores-By Benson Judge</title>
+    <!-- Tailwind CSS CDN for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            font-family: 'Inter', sans-serif;
+            background-color: #e0f2fe; /* Light Blue */
         }
-        .header {
-            background-color: #004d40;
-            color: #fff;
-            text-align: center;
-            padding: 2rem 1rem;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
-        .container {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 0 1rem;
-        }
-        .section {
-            background-color: #fff;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .section h2 {
-            color: #004d40;
-            border-bottom: 2px solid #e0e0e0;
-            padding-bottom: 0.5rem;
-            margin-top: 0;
-        }
-        .cta {
-            text-align: center;
-            background-color: #ff9800;
-            color: #fff;
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-size: 1.2rem;
-        }
-        .cta a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            background-color: #e65100;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            margin-top: 1rem;
+        /* Custom SVG for feature icons - adjusted for a slightly more visible blue */
+        .feature-icon {
             display: inline-block;
-            transition: background-color 0.3s ease;
+            width: 2.5rem;
+            height: 2.5rem;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%232563EB" width="18px" height="18px"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat center center;
+            background-size: contain;
+            margin-bottom: 1rem;
         }
-        .cta a:hover {
-            background-color: #bf360c;
+        /* Style for the Table of Contents nested lists */
+        .toc-chapter-content ul {
+            margin-left: 1.5rem;
+            list-style: disc;
+            color: #4b5563; /* gray-700 */
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        .toc-chapter-content li {
+            margin-bottom: 0.5rem;
         }
-        ul li {
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23004d40" width="18px" height="18px"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat left center;
-            padding-left: 25px;
-            margin-bottom: 10px;
+        /* Style for top-level chapters within the accordion */
+        .toc-chapter-content > ul > li:not(:last-child) {
+            margin-bottom: 0.75rem; /* Add some space between main points in the TOC */
         }
-        .footer {
-            text-align: center;
-            padding: 1rem;
-            color: #777;
+        /* Style for sub-lists within the accordion */
+        .toc-chapter-content ul ul {
+            margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
+            list-style: circle; /* Use different bullet for sub-lists */
         }
     </style>
 </head>
-<body>
+<body class="min-h-screen flex flex-col items-center antialiased">
 
-    <div class="header">
-        <h1>Your Business, Your Control.</h1>
-        <p>A Practical Guide to Mastering Product Management for Small Businesses in Ndola, Zambia.</p>
-    </div>
-
-    <div class="container">
-        <div class="section">
-            <h2>From Confusion to Control: Unlock Your Store's True Potential</h2>
-            <p>Are you a small business owner in Ndola struggling with stock management, pricing, and unpredictable profits? Our guide, **The Ndola Retailer's Guide**, is your hands-on manual to turn chaos into a streamlined, profitable system. We walk you through every critical step of the product lifecycle, from the moment a product enters your door to the second it's sold.</p>
+    <!-- Header (Optional, could be for navigation later) -->
+    <header class="w-full bg-white bg-opacity-90 shadow-sm py-4 mb-8 md:mb-12 sticky top-0 z-10">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-800">The Retailer's Guide</a>
+            <nav>
+                <ul class="hidden md:flex space-x-6">
+                    <li><a href="#about" class="text-gray-600 hover:text-blue-700 font-medium">About</a></li>
+                    <li><a href="#toc" class="text-gray-600 hover:text-blue-700 font-medium">Table of Contents</a></li>
+                    <li><a href="#benefits" class="text-gray-600 hover:text-blue-700 font-medium">Benefits</a></li>
+                    <li><a href="#cta-bottom" class="text-blue-600 hover:text-blue-800 font-bold py-2 px-4 rounded-full border border-blue-600">Preorder Now</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="section">
-            <h2>Inside the Book: What You'll Learn</h2>
-            <p>We break down essential concepts into easy-to-follow, actionable steps, showing you exactly how to implement them for immediate results. Inside, you'll discover how to:</p>
-            <ul>
-                <li>**Receive Products Like a Pro:** Learn how to check for quality, verify quantities, and manage expiries to prevent financial loss from the start.</li>
-                <li>**Master Your Inventory with a Simple Excel File:** Discover how to build a powerful "Product Receipt and Price Adjustment File" that automatically tracks stock, calculates costs, and flags necessary price changes.</li>
-                <li>**Price for Profit, Not Just to Compete:** Understand the secrets of markup and how to set prices that cover your costs, account for expenses, and guarantee a healthy profit margin.</li>
-                <li>**Organize for Success:** Get practical advice on how to handle storage and shelving to eliminate stock discrepancies, reduce waste, and improve product visibility.</li>
-            </ul>
-        </div>
+    <!-- Main Content Area -->
+    <div class="w-full max-w-7xl mx-auto px-4 lg:px-6">
 
-        <div class="section">
-            <h2>Why This Book is Different</h2>
-            <p>This isn't just theory. It's a practical, step-by-step guide designed specifically for the unique challenges of the Zambian retail environment. We use real-world examples (like Rufedol and bottled water) to make complex concepts simple and applicable to your daily operations. This guide is your new operational command center—a reliable lens through which to manage product flow, profitability, and business sustainability.</p>
-        </div>
+        <!-- Hero Section - Prominent, Responsive Intro -->
+        <section class="bg-blue-600 text-white rounded-3xl shadow-xl overflow-hidden mb-16 py-12 md:py-20 px-6 md:px-12 relative flex flex-col md:flex-row items-center justify-between gap-10">
+            <!-- Text Content -->
+            <div class="md:w-1/2 text-center md:text-left relative z-10">
+                <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight drop-shadow-lg">
+                    Product Management for Small & Medium Retail Stores.
+                </h1>
+                <p class="text-xl md:text-2xl font-light mb-2 opacity-90 drop-shadow-md">
+                    Your Essential Guide to Strategic Product Management for Small & Medium Retail Stores.
+                </p>
+                <p class="text-lg font-medium mb-8 opacity-80">By Benson Judge</p>
+                <a href="https://wa.me/260965031851" class="inline-block bg-white text-blue-800 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75">
+                    Preorder Your Copy on WhatsApp (K320)
+                </a>
+            </div>
+
+            <!-- Book Cover Image -->
+            <div class="md:w-1/2 flex justify-center md:justify-end relative z-10">
+                <img
+                    src="https://raw.githubusercontent.com/bensonjudge/images/main/Book%20Product%20Management%20For%20Small%20and%20Medium%20Retail%20Stores%20by%20Benson%20Judge.jpeg"
+                    alt="Book Cover: The Retailer's Guide"
+                    class="w-2/3 md:w-full max-w-xs md:max-w-sm h-auto rounded-2xl shadow-2xl border-4 border-white object-cover transform hover:scale-102 transition duration-300 ease-in-out"
+                    onerror="this.onerror=null;this.src='https://placehold.co/400x600/bfdbff/1f4d8a?text=Book+Cover';"
+                >
+            </div>
+        </section>
+
+        <!-- Quick Intro / Problem & Solution Statement -->
+        <section id="about" class="bg-white rounded-3xl shadow-xl p-8 sm:p-10 md:p-14 mb-16 border border-gray-100 text-center md:text-left">
+            <h2 class="text-4xl font-bold text-blue-800 mb-6 leading-tight">Streamline Operations, Boost Your Bottom Line</h2>
+            <p class="text-lg leading-relaxed text-gray-800 mb-6">
+                After years of hands-on experience in retail product management, **Benson Judge** has poured his insights into a practical, easy-to-follow book made specifically for small and medium retail stores. Titled **Product Management for Small and Medium Retail Stores**, this book is your step-by-step guide to streamlining operations, reducing losses, and boosting profitability.
+            </p>
+            <p class="text-lg leading-relaxed text-gray-800">
+                Are fluctuating stock levels, inconsistent pricing, and unpredictable profits hindering your retail business? This comprehensive manual transforms operational chaos into a highly efficient, profitable system, navigating every critical stage of the product lifecycle from initial procurement to final sale. Empower yourself with actionable strategies for immediate impact.
+            </p>
+        </section>
+
+        <!-- Table of Contents Section (Accordion/Tiles Format) -->
+        <section id="toc" class="bg-white rounded-3xl shadow-xl p-8 sm:p-10 md:p-14 mb-16 border border-gray-100 text-center">
+            <h2 class="text-4xl font-bold text-blue-800 mb-8 leading-tight text-center">Table of Contents</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-w-full mx-auto">
+
+                <!-- Chapter 1: WHAT IS PRODUCT MANAGEMENT? -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 1</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">WHAT IS PRODUCT MANAGEMENT?</p>
+                        <ul>
+                            <li>Product Management in the Context of Pharmacies and Mini Markets
+                                <ul>
+                                    <li>Pharmacies</li>
+                                    <li>Mini Markets</li>
+                                </ul>
+                            </li>
+                            <li>The Product Life Cycle: From Entry to Exit
+                                <ul>
+                                    <li>Product Entry</li>
+                                    <li>Product Exit</li>
+                                </ul>
+                            </li>
+                            <li>Why Lifecycle Thinking Matters</li>
+                            <li>The Value of Good Product Management
+                                <ul>
+                                    <li>Product Availability Builds Trust</li>
+                                    <li>Smart Inventory = Better Profitability</li>
+                                    <li>Waste Reduction Saves your Bottom Line</li>
+                                    <li>Clean, Organized Stores Drive Perception</li>
+                                    <li>Compliance and Safety (Especially in Pharmacies)</li>
+                                    <li>Actionable Data Leads to Smarter Decisions</li>
+                                    <li>Smoother Operations = Better Customer Service</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 2: STEPS TO GOOD PRODUCT MANAGEMENT -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 2</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">STEPS TO GOOD PRODUCT MANAGEMENT</p>
+                        <ul>
+                            <li>Needs and Wants</li>
+                            <li>Perceived Value</li>
+                            <li>Identifying Customer Needs</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 3: PRODUCT RECEIPT -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 3</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">PRODUCT RECEIPT</p>
+                        <ul>
+                            <li>Checking Product Quality and Expiry</li>
+                            <li>Quantity Check and Documentation
+                                <ul>
+                                    <li>What you're looking for</li>
+                                    <li>What to Do Practically</li>
+                                    <li>Document Everything</li>
+                                    <li>Common Errors to Watch For</li>
+                                </ul>
+                            </li>
+                            <li>Pricing</li>
+                            <li>Practical Guide to Pricing: Applying the 1.3 Rule</li>
+                            <li>Stock Tracking — Handling the Process smoothly</li>
+                            <li>Using Excel for Product Receipt & Price Tracking</li>
+                            <li>How to Use These Excel Parameters to Manage the Product Life Cycle</li>
+                            <li>Tracking Quantities and Pricing in Excel</li>
+                            <li>Total Cost</li>
+                            <li>Unit Cost</li>
+                            <li>Setting the Selling Price</li>
+                            <li>What is a Markup?</li>
+                            <li>Applying Markup Practically: Using Excel to Track and Adjust Pricing</li>
+                            <li>Empowering Better Product Management with Aimbuc</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 4: TRANSITIONING TO THE POINT OF SALE (POS) SYSTEM -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 4</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">TRANSITIONING TO THE POINT OF SALE (POS) SYSTEM</p>
+                        <ul>
+                            <li>What is a POS (Point of Sale) System?
+                                <ul>
+                                    <li>Processes Sales Transactions</li>
+                                    <li>Tracks Inventory Automatically</li>
+                                    <li>Manages Pricing and Discounts</li>
+                                    <li>Provides Sales Reports</li>
+                                    <li>Supports User and Role Control</li>
+                                    <li>Improves Customer Service</li>
+                                </ul>
+                            </li>
+                            <li>Why is POS Important After Product Receipt and Pricing?</li>
+                            <li>Not All POS Systems Are the Same — Choose Wisely</li>
+                            <li>Aimbuc’s Role in POS Setup</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 5: STORAGE AND SHELVING -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 5</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">STORAGE AND SHELVING</p>
+                        <ul>
+                            <li>What Has Worked for Us</li>
+                            <li>Display and shelving.</li>
+                            <li>Product location</li>
+                            <li>Product Damage and Expiry Management</li>
+                            <li>Tracking Product Damage and Expiry: How It Plays Out in Practice</li>
+                            <li>Tick Box: Expired or Damaged</li>
+                            <li>Stock Monitoring and Inventory Checks</li>
+                            <li>How We Structure Stock Monitoring</li>
+                            <li>The Random Weekly Stock Check File</li>
+                            <li>Monthly Comprehensive Stock Counts</li>
+                            <li>Planning for the Count</li>
+                            <li>Designing the Counting Form</li>
+                            <li>Post Stock Count: What Comes Next</li>
+                            <li>Presenting the Findings to the Team</li>
+                            <li>Why This Step Matters</li>
+                            <li>Independent Stock Counts – Aimbuc’s Value-Driven Service</li>
+                            <li>From Product Receipt to Stock Count: A Comprehensive Summary
+                                <ul>
+                                    <li>Product Receipt and Detail Capture</li>
+                                    <li>POS System Update</li>
+                                    <li>Storage and Shelving</li>
+                                    <li>Product Expiry and Damage Management</li>
+                                    <li>Stock Monitoring and Inventory Checks</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 6: PRODUCT PROMOTIONS AND DISCOUNTS -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 6</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">PRODUCT PROMOTIONS AND DISCOUNTS: FROM STOCK MOVEMENT TO STRATEGIC GROWTH</p>
+                        <ul>
+                            <li>Promotion Types We Commonly Use
+                                <ul>
+                                    <li>Price Markdowns</li>
+                                    <li>Bundle Offers</li>
+                                    <li>Flash Sales</li>
+                                    <li>Loyalty Discounts</li>
+                                </ul>
+                            </li>
+                            <li>Designing an Effective Promotion</li>
+                            <li>Tracking Promotions: With or Without a POS System</li>
+                            <li>Promotions with Integrity</li>
+                            <li>Pricing Principles for Promotions</li>
+                            <li>Pharmacy-Specific Promotions</li>
+                            <li>Product Analysis: When your Stock Speaks</li>
+                            <li>Using Data to See Clearly</li>
+                            <li>Beyond Just Numbers</li>
+                            <li>Product Performance by Day</li>
+                            <li>Analysis is Not a One-Off — It’s a Culture</li>
+                            <li>In Summary: What Product Analysis Gives us</li>
+                            <li>What “On‑Point” Data Entry Looks Like</li>
+                            <li>The Pay‑Off</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 7: PEOPLE — THE HUMAN ENGINE OF PRODUCT MANAGEMENT -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 7</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">PEOPLE — THE HUMAN ENGINE OF PRODUCT MANAGEMENT</p>
+                        <ul>
+                            <li>Experience — The Value of Longevity</li>
+                            <li>Education and Skill — The Value of Knowledge</li>
+                            <li>Output and Performance — The Value of Results</li>
+                            <li>Putting It All Together</li>
+                            <li>The Cost of Ignoring Compensation Fairness</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 8: Deliberate Strategies and the Power of Vision -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 8</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">Deliberate Strategies and the Power of Vision</p>
+                        <ul>
+                            <li>Strategy Is Not Complicated — It’s Just Deliberate</li>
+                            <li>The Role of Vision and Goals</li>
+                            <li>Strategy as a Way of Working</li>
+                            <li>Product Management as a Living System</li>
+                        </ul>
+                    </div>
+                </details>
+
+                <!-- Chapter 9: Partner with Aimbuc -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 9</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">Partner with Aimbuc: Practical Support from Market Research to Product Management</p>
+                    </div>
+                </details>
+
+                <!-- Chapter 10: What We Offer at Aimbuc -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 10</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">What We Offer at Aimbuc</p>
+                    </div>
+                </details>
+
+                <!-- Chapter 11: Let’s Grow your Store — Together -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 11</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">Let’s Grow your Store — Together</p>
+                    </div>
+                </details>
+
+                <!-- Chapter 12: Appendix -->
+                <details class="group bg-blue-50 rounded-xl shadow-sm border border-blue-100 overflow-hidden text-left">
+                    <summary class="flex justify-between items-center p-4 text-lg font-bold text-blue-800 cursor-pointer hover:bg-blue-100 transition-colors duration-200">
+                        <span>Chapter 12</span>
+                        <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </summary>
+                    <div class="px-4 pb-4 pt-2 border-t border-blue-100 text-gray-700 toc-chapter-content">
+                        <p class="font-bold text-blue-800 mb-2">Appendix: Tools, Templates, and Practical Notes</p>
+                        <ul>
+                            <li>Stock Receipt Checklist</li>
+                            <li>Minimum Shelf Number Template</li>
+                            <li>Damage & Expiry Log Sheet</li>
+                            <li>Weekly Random Stock Check</li>
+                            <li>Monthly Comprehensive Stock Count</li>
+                            <li>Staff Growth Pathways (Sample Structure)</li>
+                            <li>Key SOPs us Should Create (Standard Operating Procedures)</li>
+                            <li>Suggested Daily/Weekly Store Rhythm</li>
+                            <li>Key Business Health Indicators</li>
+                        </ul>
+                    </div>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- What You'll Achieve with This Guide - Feature Grid -->
+        <section id="benefits" class="bg-blue-50 rounded-3xl shadow-xl p-8 sm:p-10 md:p-14 mb-16">
+            <h2 class="text-4xl font-bold text-blue-800 mb-10 text-center leading-tight">What You'll Achieve with This Guide</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Feature 1: Optimize Product Receipt -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                    <span class="feature-icon bg-blue-100 rounded-full flex items-center justify-center mb-4"></span>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Optimize Product Receipt</h3>
+                    <p class="text-gray-700">Implement robust quality control and quantity verification to eliminate losses from damaged or incorrect shipments.</p>
+                </div>
+                <!-- Feature 2: Automate Inventory Control -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                    <span class="feature-icon bg-blue-100 rounded-full flex items-center justify-center mb-4"></span>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Automate Inventory Control</h3>
+                    <p class="text-gray-700">Utilize a powerful Excel-based "Product Receipt and Price Adjustment File" for real-time stock tracking, cost calculation, and proactive price management.</p>
+                </div>
+                <!-- Feature 3: Strategize Pricing for Profit -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                    <span class="feature-icon bg-blue-100 rounded-full flex items-center justify-center mb-4"></span>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Strategize Pricing for Profit</h3>
+                    <p class="text-gray-700">Master markup principles to establish competitive prices that cover all costs, account for overhead, and ensure sustainable profit margins.</p>
+                </div>
+                <!-- Feature 4: Enhance Store Organization -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                    <span class="feature-icon bg-blue-100 rounded-full flex items-center justify-center mb-4"></span>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Enhance Store Organization</h3>
+                    <p class="text-gray-700">Apply best practices for storage and shelving to minimize discrepancies, reduce waste, and improve product accessibility and visibility.</p>
+                </div>
+                <!-- New Feature: Strategic People Management -->
+                <div class="bg-white p-6 rounded-xl shadow-md flex flex-col items-center text-center transform hover:scale-105 transition duration-300 ease-in-out border border-gray-100">
+                    <span class="feature-icon bg-blue-100 rounded-full flex items-center justify-center mb-4"></span>
+                    <h3 class="text-xl font-semibold text-blue-800 mb-2">Strategic People Management</h3>
+                    <p class="text-gray-700">Build a high-performing team with clear roles, effective training, and a positive culture, ensuring accountability and growth for sustained operational excellence.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why This Book is Different Section - Unique Selling Proposition -->
+        <section id="why-different" class="bg-white rounded-3xl shadow-xl p-8 sm:p-10 md:p-14 mb-16 border border-gray-100 text-center">
+            <h2 class="text-4xl font-bold text-blue-800 mb-6 leading-tight">Practical Solutions for Real-World Retail</h2>
+            <p class="text-lg leading-relaxed text-gray-800 max-w-3xl mx-auto">
+                This isn't theoretical advice; it's a practical, step-by-step methodology specifically engineered for the dynamic challenges faced by small and medium retailers. Our focus is on tangible implementation, equipping you with an operational command center—a reliable framework to manage product flow, enhance profitability, and ensure long-term business sustainability.
+            </p>
+        </section>
         
-        <div class="cta">
-            <p>Ready to take control of your stock and your bottom line?</p>
-            <a href="#">Buy Now</a>
-            <p style="font-size: 0.9rem; margin: 0.5rem 0 0;">(Link coming soon!)</p>
+        <!-- Call to Action (CTA) Button - Final Prompt -->
+        <div id="cta-bottom" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-8 rounded-3xl shadow-lg text-center mb-16">
+            <p class="text-2xl md:text-3xl font-bold mb-4">Ready to implement proven strategies and elevate your retail business?</p>
+            <a href="https://wa.me/260965031851" class="inline-block bg-blue-800 hover:bg-blue-900 text-white font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-75 text-lg">
+                Preorder Your Copy on WhatsApp (K320)
+            </a>
+            <p class="text-sm mt-3 opacity-90">Click to connect with us and secure your essential business resource.</p>
         </div>
-    </div>
 
-    <div class="footer">
-        <p>&copy; 2025 The Ndola Retailer's Guide. All Rights Reserved.</p>
+        <!-- Footer Section -->
+        <footer class="text-center text-gray-500 text-base py-8 w-full">
+            <p>&copy; 2025 Product Management for Small & Medium Retail Stores . All Rights Reserved.</p>
+            <p class="mt-1">For business inquiries, please contact the author.</p>
+        </footer>
     </div>
 
 </body>
