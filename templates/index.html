@@ -15,8 +15,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aimbuc | Empowering Teams with Personalized Business Strategy</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/bensonjudge/images/main/2%20favicon.ico">
+</head>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #0f172a; scroll-behavior: smooth; }
         .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
@@ -37,7 +40,7 @@
     <nav class="hidden lg:flex items-center space-x-10">
       <a href="#about" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">About</a>
       <a href="#services" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">Services</a>
-      <a href="#inventory-management" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">Inventory</a>
+      <a href="#cloud-store" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">ERP Store</a>
       <a href="#insights" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">Insights</a>
       <a href="#contact" class="px-6 py-2 bg-slate-900 text-white rounded-sm text-sm font-bold hover:bg-blue-600 transition shadow-lg">GET STARTED</a>
     </nav>
@@ -55,7 +58,7 @@
     <nav class="flex flex-col space-y-8 text-2xl font-bold uppercase tracking-widest">
         <a href="#about">About</a>
         <a href="#services">Services</a>
-        <a href="#inventory-management">Inventory</a>
+        <a href="#cloud-store">ERP Store</a>
         <a href="#insights">Insights</a>
         <a href="#contact" class="text-blue-500">Get Started</a>
     </nav>
@@ -89,16 +92,74 @@
   </div>
 </section>
 
-<section class="py-16 bg-white border-b border-slate-100">
-    <div class="container mx-auto px-6 text-center">
-        <p class="text-xs font-bold text-slate-400 uppercase tracking-[0.3em] mb-12">Clients And Partners</p>
-        <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50">
-            <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Pirchmart_Full%20Colour.png" class="h-8 grayscale" alt="Pirchmart">
-            <img src="https://raw.githubusercontent.com/bensonjudge/images/main/goodleaflogo.png" class="h-8 grayscale" alt="Goodleaf">
-            <img src="https://raw.githubusercontent.com/bensonjudge/images/main/keblog.png" class="h-8 grayscale" alt="Kebby">
-            <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Artin%20Tech.jpeg" class="h-8 grayscale" alt="Artin Tech">
+<section class="py-20 bg-white border-b border-slate-100 overflow-hidden">
+    <div class="container mx-auto px-6 text-center mb-12">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.5em]">Clients & Strategic Partners</p>
+    </div>
+
+    <div class="relative flex overflow-x-hidden">
+        <div class="flex animate-infinite-scroll space-x-8 pr-8">
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Autoterminal.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Autoterminal">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/WhatsApp%20Image%202025-12-04%20at%2007.02.27%20(1).jpeg" class="max-h-14 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Partner">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Pirchmart_Full%20Colour.png" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Pirchmart">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/goodleaflogo.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Goodleaf">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/keblog.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Kebby">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Artin%20Tech.jpeg" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Artin Tech">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Screenshot%202025-01-22%20at%205.47.19%20AM.png" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="High Lenders Mo">
+            </div>
+        </div>
+
+        <div class="flex animate-infinite-scroll space-x-8 pr-8" aria-hidden="true">
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Autoterminal.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Autoterminal">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/WhatsApp%20Image%202025-12-04%20at%2007.02.27%20(1).jpeg" class="max-h-14 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Partner">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Pirchmart_Full%20Colour.png" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Pirchmart">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/goodleaflogo.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Goodleaf">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/keblog.png" class="max-h-12 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Kebby">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Artin%20Tech.jpeg" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="Artin Tech">
+            </div>
+            <div class="flex items-center justify-center min-w-[280px] h-32 bg-slate-50 border border-slate-100 rounded-sm p-8 grayscale hover:grayscale-0 transition-all duration-500 hover:shadow-xl hover:bg-white group">
+                <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Screenshot%202025-01-22%20at%205.47.19%20AM.png" class="max-h-10 w-auto opacity-60 group-hover:opacity-100 transition-opacity" alt="High Lenders Mo">
+            </div>
         </div>
     </div>
+
+    <style>
+        @keyframes infiniteScroll {
+            from { transform: translateX(0); }
+            to { transform: translateX(-100%); }
+        }
+        .animate-infinite-scroll {
+            animation: infiniteScroll 40s linear infinite;
+        }
+        /* Optional: Pause on hover */
+        .relative:hover .animate-infinite-scroll {
+            animation-play-state: paused;
+        }
+    </style>
 </section>
 
 <section id="about" class="py-32 bg-white">
