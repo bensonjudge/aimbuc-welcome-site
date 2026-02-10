@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-C0X33PJBLT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-C0X33PJBLT');
+</script>
+
     <script type="text/javascript">
         !function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",a="crossOrigin",n="POST",t="stats-",c="appInsightsSDK",m=y.name||"appInsights";(y.name||T[m])&&(T[m]=y);var g=T[m]||function(f){var s=!1,u=!1,D={initialize:!0,queue:[],sv:"5",version:2,config:f};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.operation.id"]=Math.random().toString(36).substring(2,15),{data:e,time:new Date().toISOString(),ver:1,sampleRate:100,tags:n}}function l(e,t,n,a){D.queue.push({f:e,t:t,n:n,a:a,p:v(e,t)})}D.trackEvent=function(e,t,n){l("trackEvent",e,t,n)},D.trackPageView=function(e,t,n){l("trackPageView",e,t,n)},D.trackException=function(e,t,n){l("trackException",e,t,n)};return D}(y.config||{
             connectionString: "InstrumentationKey=97a0d2f3-829d-48c6-8d00-6b01e8f1d8b9;IngestionEndpoint=https://centralus-2.in.applicationinsights.azure.com/;LiveEndpoint=https://centralus.livediagnostics.monitor.azure.com/"
