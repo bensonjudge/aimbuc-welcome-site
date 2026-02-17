@@ -351,25 +351,33 @@
     </div>
   </footer>
 
-<script>
+  <script>
     const mobileMenuBtn = document.getElementById('mobile-menu-button');
     const closeMenuBtn = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
     function openMenu() {
-        mobileMenu.classList.remove('translate-x-full');
+        // Remove 'hidden' so it exists on the page, then add animation
+        mobileMenu.classList.remove('hidden');
+        mobileMenu.classList.add('flex', 'animate-menu');
         document.body.classList.add('no-scroll');
     }
 
     function closeMenu() {
-        mobileMenu.classList.add('translate-x-full');
+        // Re-hide the menu
+        mobileMenu.classList.add('hidden');
+        mobileMenu.classList.remove('flex', 'animate-menu');
         document.body.classList.remove('no-scroll');
     }
 
     mobileMenuBtn.addEventListener('click', openMenu);
     closeMenuBtn.addEventListener('click', closeMenu);
-    mobileLinks.forEach(link => link.addEventListener('click', closeMenu));
+    
+    // Close menu when clicking any link
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 </script>
 
 </body>
