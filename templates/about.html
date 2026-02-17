@@ -64,19 +64,19 @@
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white lg:hidden">
+  <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-slate-900 lg:hidden">
       <div class="flex flex-col items-center justify-center h-full space-y-8 px-6 text-center">
-          <button id="close-menu" class="absolute top-6 right-6 text-slate-900">
+          <button id="close-menu" class="absolute top-6 right-6 text-white">
               <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
               </svg>
           </button>
           
-          <a href="index.html#about" class="mobile-link text-3xl font-black uppercase tracking-tighter text-slate-900 hover:text-blue-600">About</a>
-          <a href="index.html#services" class="mobile-link text-3xl font-black uppercase tracking-tighter text-slate-900 hover:text-blue-600">Services</a>
-          <a href="index.html#cloud-store" class="mobile-link text-3xl font-black uppercase tracking-tighter text-slate-900 hover:text-blue-600">ERP Store</a>
-          <a href="index.html#insights" class="mobile-link text-3xl font-black uppercase tracking-tighter text-slate-900 hover:text-blue-600">Insights</a>
-          <a href="index.html#contact" class="mobile-link w-full py-4 bg-slate-900 text-white font-bold uppercase tracking-widest text-sm shadow-xl">Get Started</a>
+          <a href="index.html#about" class="mobile-link text-3xl font-black uppercase tracking-tighter text-white hover:text-blue-400">About</a>
+          <a href="index.html#services" class="mobile-link text-3xl font-black uppercase tracking-tighter text-white hover:text-blue-400">Services</a>
+          <a href="index.html#cloud-store" class="mobile-link text-3xl font-black uppercase tracking-tighter text-white hover:text-blue-400">ERP Store</a>
+          <a href="index.html#insights" class="mobile-link text-3xl font-black uppercase tracking-tighter text-white hover:text-blue-400">Insights</a>
+          <a href="index.html#contact" class="mobile-link w-full py-4 bg-blue-600 text-white font-bold uppercase tracking-widest text-sm shadow-xl">Get Started</a>
       </div>
   </div>
 </header>
@@ -351,33 +351,37 @@
     </div>
   </footer>
 
-  <script>
+<script>
+{
+    // Block scoping {} prevents the "redeclare" error
     const mobileMenuBtn = document.getElementById('mobile-menu-button');
     const closeMenuBtn = document.getElementById('close-menu');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
-    function openMenu() {
-        // Remove 'hidden' so it exists on the page, then add animation
-        mobileMenu.classList.remove('hidden');
-        mobileMenu.classList.add('flex', 'animate-menu');
-        document.body.classList.add('no-scroll');
-    }
+    const openMenu = () => {
+        if (mobileMenu) {
+            mobileMenu.classList.remove('hidden');
+            mobileMenu.classList.add('flex', 'animate-menu');
+            document.body.classList.add('no-scroll');
+        }
+    };
 
-    function closeMenu() {
-        // Re-hide the menu
-        mobileMenu.classList.add('hidden');
-        mobileMenu.classList.remove('flex', 'animate-menu');
-        document.body.classList.remove('no-scroll');
-    }
+    const closeMenu = () => {
+        if (mobileMenu) {
+            mobileMenu.classList.add('hidden');
+            mobileMenu.classList.remove('flex', 'animate-menu');
+            document.body.classList.remove('no-scroll');
+        }
+    };
 
-    mobileMenuBtn.addEventListener('click', openMenu);
-    closeMenuBtn.addEventListener('click', closeMenu);
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openMenu);
+    if (closeMenuBtn) closeMenuBtn.addEventListener('click', closeMenu);
     
-    // Close menu when clicking any link
     mobileLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
+}
 </script>
 
 </body>
