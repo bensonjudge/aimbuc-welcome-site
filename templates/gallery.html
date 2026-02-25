@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C0X33PJBLT"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-C0X33PJBLT');
+    </script>
+
+    <script type="text/javascript">
+        !function(T,l,y){var S=T.location,k="script",D="instrumentationKey",C="ingestionendpoint",I="disableExceptionTracking",E="ai.device.",b="toLowerCase",a="crossOrigin",n="POST",t="stats-",c="appInsightsSDK",m=y.name||"appInsights";(y.name||T[m])&&(T[m]=y);var g=T[m]||function(f){var s=!1,u=!1,D={initialize:!0,queue:[],sv:"5",version:2,config:f};function v(e,t){var n={},a="Browser";return n[E+"id"]=a[b](),n[E+"type"]=a,n["ai.operation.name"]=S&&S.pathname||"_unknown_",n["ai.operation.id"]=Math.random().toString(36).substring(2,15),{data:e,time:new Date().toISOString(),ver:1,sampleRate:100,tags:n}}function l(e,t,n,a){D.queue.push({f:e,t:t,n:n,a:a,p:v(e,t)})}D.trackEvent=function(e,t,n){l("trackEvent",e,t,n)},D.trackPageView=function(e,t,n){l("trackPageView",e,t,n)},D.trackException=function(e,t,n){l("trackException",e,t,n)};return D}(y.config||{
+            connectionString: "InstrumentationKey=97a0d2f3-829d-48c6-8d00-6b01e8f1d8b9;IngestionEndpoint=https://centralus-2.in.applicationinsights.azure.com/;LiveEndpoint=https://centralus.livediagnostics.monitor.azure.com/"
+        });T[m]=g,g.queue&&0===g.queue.length&&g.trackPageView({})}(window,document,{
+            src: "https://js.monitor.azure.com/scripts/b/ai.2.min.js",
+            name: "appInsights",
+            config: {
+                connectionString: "InstrumentationKey=97a0d2f3-829d-48c6-8d00-6b01e8f1d8b9;IngestionEndpoint=https://centralus-2.in.applicationinsights.azure.com/;LiveEndpoint=https://centralus.livediagnostics.monitor.azure.com/"
+            }
+        });
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Gallery | Aimbuc Sustainability</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/bensonjudge/images/main/2%20favicon.ico">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #ffffff; color: #0f172a; scroll-behavior: smooth; }
+        .glass-nav { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .book-card:hover .book-overlay { opacity: 1; }
+        .no-scroll { overflow: hidden; }
+    </style>
+</head>
+
+<body class="w-full overflow-x-hidden">
+
+<header class="glass-nav sticky top-0 z-50 w-full border-b border-slate-100">
+  <div class="container mx-auto flex justify-between items-center px-6 py-4">
+    <a href="index.html" class="flex items-center group">
+      <span class="text-3xl font-extrabold tracking-tight text-slate-900 group-hover:text-blue-600 transition">Aimbuc</span>
+    </a>
+    <nav class="hidden lg:flex items-center space-x-10">
+      <a href="sustainability.html" class="text-slate-600 hover:text-blue-600 text-sm font-bold uppercase tracking-widest transition">Back to Impact</a>
+      <a href="index.html#contact" class="px-6 py-2 bg-slate-900 text-white rounded-sm text-sm font-bold hover:bg-blue-600 transition shadow-lg">GET STARTED</a>
+    </nav>
+    <button id="mobile-menu-button" class="lg:hidden text-slate-900 p-2">
+        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white lg:hidden">
+      <div class="flex flex-col items-center justify-center h-full space-y-8 px-6 text-center">
+          <button id="close-menu" class="absolute top-6 right-6 text-slate-900">
+              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+          <a href="index.html" class="text-3xl font-black uppercase tracking-tighter text-slate-900">Home</a>
+          <a href="sustainability.html" class="text-3xl font-black uppercase tracking-tighter text-slate-900">Sustainability</a>
+          <a href="index.html#contact" class="w-full py-4 bg-slate-900 text-white font-bold uppercase tracking-widest text-sm">Get Started</a>
+      </div>
+  </div>
+</header>
+
+<section class="pt-24 pb-12 bg-slate-50 border-b border-slate-200">
+  <div class="container mx-auto px-6 max-w-6xl text-center">
+    <span class="text-blue-600 font-bold uppercase tracking-[0.4em] text-xs">Aimbuc Virtual Library</span>
+    <h1 class="text-4xl lg:text-5xl font-black text-slate-900 mt-4 uppercase">The Book Gallery</h1>
+    <p class="text-lg text-slate-600 mt-4 max-w-2xl mx-auto">Promoting literacy and supporting the Zambian writing industry through our SDG 4 CSR initiative.</p>
+  </div>
+</section>
+
+<main class="container mx-auto px-6 max-w-6xl py-16">
+  
+  <div class="flex flex-wrap justify-center gap-4 mb-16">
+    <button class="px-8 py-2 bg-slate-900 text-white text-xs font-bold uppercase tracking-widest rounded-full">All Collections</button>
+    <button class="px-8 py-2 bg-white border border-slate-200 text-slate-600 text-xs font-bold uppercase tracking-widest rounded-full hover:border-blue-600 hover:text-blue-600 transition">Zambian Authors</button>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+    
+    <div class="group cursor-pointer">
+      <div class="relative aspect-[3/4] bg-slate-100 overflow-hidden border border-slate-200 transition-transform duration-500 group-hover:-translate-y-2 shadow-sm">
+        <img src="https://images.unsplash.com/photo-1543004629-1420f544af83?auto=format&fit=crop&q=80&w=800" alt="Unfettered" class="w-full h-full object-cover">
+        
+        <div class="book-overlay absolute inset-0 bg-slate-900/80 opacity-0 transition-opacity duration-300 flex flex-col justify-center items-center p-6 text-center">
+            <p class="text-white text-sm italic mb-4">A powerful journey exploring freedom and resilience.</p>
+            <a href="https://zm.linkedin.com/company/advanced-information-management-and-business-consultancy" target="_blank" class="px-4 py-2 bg-blue-600 text-white text-[10px] font-bold uppercase tracking-widest hover:bg-white hover:text-blue-600 transition">Connect with Author</a>
+        </div>
+      </div>
+      <div class="mt-6">
+        <span class="text-blue-600 font-bold text-[10px] uppercase tracking-widest">Zambian Authored</span>
+        <h3 class="text-lg font-black text-slate-900 mt-1 uppercase tracking-tight">Unfettered</h3>
+        <p class="text-slate-500 text-sm">By Enala Luse Ngoma</p>
+      </div>
+    </div>
+
+    <div class="border-2 border-dashed border-slate-100 aspect-[3/4] flex flex-col items-center justify-center p-10 text-center bg-slate-50/30">
+        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Processing Submission</p>
+        <p class="text-slate-300 text-[10px] mt-2 italic">Aimbuc Virtual Library</p>
+    </div>
+
+    <div class="border-2 border-dashed border-slate-100 aspect-[3/4] flex flex-col items-center justify-center p-10 text-center bg-slate-50/30">
+        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Processing Submission</p>
+        <p class="text-slate-300 text-[10px] mt-2 italic">Aimbuc Virtual Library</p>
+    </div>
+
+    <div class="border-2 border-dashed border-slate-100 aspect-[3/4] flex flex-col items-center justify-center p-10 text-center bg-slate-50/30">
+        <p class="text-slate-400 font-bold uppercase tracking-widest text-[10px]">Processing Submission</p>
+        <p class="text-slate-300 text-[10px] mt-2 italic">Aimbuc Virtual Library</p>
+    </div>
+
+  </div>
+</main>
+
+<section class="bg-slate-50 py-20 border-t border-slate-200">
+    <div class="container mx-auto px-6 max-w-4xl text-center">
+        <h2 class="text-3xl font-black text-slate-900 uppercase mb-6">Are you a Local Author?</h2>
+        <p class="text-slate-600 mb-8 leading-relaxed">As part of our commitment to the Zambian Writing Industry, we purchase and showcase works from local talent to increase visibility and literacy access.</p>
+        <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a href="https://forms.gle/MxR7chZUV1PuDMVA7" target="_blank" class="inline-block px-10 py-4 bg-blue-600 text-white font-bold uppercase tracking-widest text-sm hover:bg-slate-900 transition shadow-lg">Submit Your Work</a>
+            <a href="https://zm.linkedin.com/company/advanced-information-management-and-business-consultancy" target="_blank" class="inline-block px-10 py-4 border border-slate-900 text-slate-900 font-bold uppercase tracking-widest text-sm hover:bg-slate-900 hover:text-white transition">Our Social Handle</a>
+        </div>
+    </div>
+</section>
+
+<footer class="bg-slate-900 text-white py-12 border-t border-slate-800">
+  <div class="container mx-auto px-6 text-center">
+      <p class="text-[10px] font-bold uppercase tracking-widest opacity-60">&copy; 2026 Advanced Information Management & Business Consultancy Ltd. Zambia.</p>
+  </div>
+</footer>
+
+<script>
+    const mobileMenuBtn = document.getElementById('mobile-menu-button');
+    const closeMenuBtn = document.getElementById('close-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.onclick = () => { mobileMenu.classList.remove('hidden'); document.body.classList.add('no-scroll'); };
+    closeMenuBtn.onclick = () => { mobileMenu.classList.add('hidden'); document.body.classList.remove('no-scroll'); };
+</script>
+
+</body>
+</html>
