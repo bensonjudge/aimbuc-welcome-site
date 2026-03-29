@@ -659,3 +659,19 @@
 
 </body>
 </html>
+
+<script>
+    const btn = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const close = document.getElementById('close-menu');
+    btn.onclick = () => menu.classList.remove('translate-x-full');
+    close.onclick = () => menu.classList.add('translate-x-full');
+    menu.querySelectorAll('a').forEach(a => a.onclick = () => menu.classList.add('translate-x-full'));
+
+    const slider = document.getElementById('insight-slider');
+    document.getElementById('next').onclick = () => slider.scrollBy({ left: 400, behavior: 'smooth' });
+    document.getElementById('prev').onclick = () => slider.scrollBy({ left: -400, behavior: 'smooth' });
+</script>
+
+</body>
+</html>
