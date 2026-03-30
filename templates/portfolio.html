@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | AIMBUC Data Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class="bg-white text-slate-900" x-data="{ tab: 'all' }">
+
+    <nav class="py-6 px-6 border-b border-slate-100 bg-white sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-xl font-black tracking-tighter uppercase">Aimbuc<span class="text-blue-600">.</span></a>
+            <div class="flex gap-8 items-center">
+                <a href="services.html" class="text-[10px] font-black uppercase tracking-widest text-slate-400 hover:text-blue-600 transition-colors">Services</a>
+                <a href="index.html" class="text-[10px] font-black uppercase tracking-widest bg-slate-900 text-white px-4 py-2 hover:bg-blue-600 transition-colors">Back Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="py-20 bg-slate-900 text-white">
+        <div class="container mx-auto px-6 text-center">
+            <span class="text-blue-500 text-xs font-black uppercase tracking-[0.6em] mb-4 block">Case Studies</span>
+            <h1 class="text-5xl md:text-6xl font-black uppercase tracking-tighter mb-6">Project Ecosystem</h1>
+            <p class="text-slate-400 max-w-2xl mx-auto text-lg leading-relaxed">
+                A definitive look at the business architectures, digital systems, and strategic implementations we've delivered across the Zambian market.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-12 border-b border-slate-100 sticky top-[73px] bg-white z-40">
+        <div class="container mx-auto px-6 flex flex-wrap justify-center gap-4">
+            <button @click="tab = 'all'" :class="tab === 'all' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all">All Projects</button>
+            <button @click="tab = 'retail'" :class="tab === 'retail' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all">Retail & Beverage</button>
+            <button @click="tab = 'health'" :class="tab === 'health' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all">Healthcare IT</button>
+            <button @click="tab = 'strategy'" :class="tab === 'strategy' ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-500'" class="px-6 py-2 text-[10px] font-black uppercase tracking-widest transition-all">Strategy & Digital</button>
+        </div>
+    </section>
+
+    <section class="py-20 bg-slate-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <div x-show="tab === 'all' || tab === 'retail'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Pirchmart_Full%20Colour.png" class="max-h-12 w-auto object-contain" alt="Pirch Mart">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Retail</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Pirch Mart Stores</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Under the directive of the founders, we led:</p>
+                        <ul class="text-sm text-slate-600 space-y-2 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span>Business Plan & Company Registrations</li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span>Market Research & Viability Studies</li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span>Operational Strategy & Process Design</li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span>Launch & Implementation Management</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Retail%20services." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'health'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/goodleaflogo.png" class="max-h-12 w-auto object-contain" alt="Goodleaf Pharmacy">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Healthcare</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Goodleaf Pharmacy</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Across all branches, we provided:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>P.O.S. Systems:</strong> Pharmaceutical inventory management.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span>Comprehensive staff training on system operations.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span>Ongoing Product Management across all branches.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Pharmaceutical%20Systems." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'retail'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/keblog.png" class="max-h-12 w-auto object-contain" alt="Kebby Beauty">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Cosmetics</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Kebby Beauty Store</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">On-call technical deployment:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>P.O.S. Systems:</strong> Management of cosmetic variants and inventory.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span>Staff training on retail product management workflows.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Cosmetics%20Retail%20Systems." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'retail'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/avril%20liquor%20store.jpeg" class="max-h-10 w-auto object-contain" alt="Avri'l">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Retail & Beverage</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Avri'l Liquor Store</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Specialized beverage inventory control:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>P.O.S. Systems:</strong> Tailored stock level management for retail.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span>Operational training for high-volume store staff.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Liquor%20Store%20Management%20Systems." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'strategy'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/techlume.png" class="max-h-10 w-auto object-contain" alt="Techlumier">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Technology</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Techlumier</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Foundational business architecture:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Brand Identity:</strong> Strategic naming and brand development.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Business Plan:</strong> Full technical roadmap development.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Legal Compliance:</strong> Successful company registration.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Startup%20Architecture." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'strategy'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/Screenshot%202025-01-22%20at%205.47.19%20AM.png" class="max-h-10 w-auto object-contain" alt="HighLenders">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Financial</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">HighLenders Agent</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Financial agency setup services:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Strategy:</strong> Name generation and business plan.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Legal Setup:</strong> Business registration and compliance.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Operations:</strong> Strategic agency workflow design.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Financial%20Business%20Setup." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'strategy'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6 grayscale group-hover:grayscale-0 transition-all duration-500">
+                        <img src="https://raw.githubusercontent.com/bensonjudge/images/main/goodleaflogo.png" class="max-h-12 w-auto object-contain" alt="Digital Archive">
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Digital Transformation</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">Digital Archive</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Physical record optimization:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Document Capture:</strong> High-volume scanning back-flow.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Digital Conversion:</strong> Searchable digital content transition.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20Digitization%20services." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+                <div x-show="tab === 'all' || tab === 'health'" x-cloak class="group border border-slate-200 p-8 hover:shadow-xl bg-white transition-all flex flex-col h-full">
+                    <div class="h-20 flex items-center mb-6">
+                        <div class="text-2xl font-black text-slate-300 tracking-tighter uppercase italic">Medi Text</div>
+                    </div>
+                    <h4 class="text-blue-600 font-black uppercase text-[10px] tracking-widest mb-2">Healthcare IT</h4>
+                    <h3 class="text-xl font-bold text-slate-900 mb-3">MediText Pharmacy</h3>
+                    <div class="flex-grow">
+                        <p class="text-sm text-slate-700 font-medium mb-4">Infrastructure technical transition:</p>
+                        <ul class="text-sm text-slate-600 space-y-3 mb-8">
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>System Migration:</strong> Expert P.O.S system transition.</span></li>
+                            <li class="flex items-start gap-2"><span class="w-1.5 h-1.5 bg-blue-600 rounded-full mt-1.5 shrink-0"></span><span><strong>Data Sync:</strong> Preservation of medical and sales data integrity.</span></li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/260761229225?text=Hello%20Aimbuc,%20I%20am%20interested%20in%20System%20Migration." target="_blank" class="mt-auto block text-center py-4 bg-slate-900 text-white text-[10px] font-bold uppercase tracking-[0.2em] hover:bg-blue-600 transition-all">Get Service</a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-20 bg-white border-t border-slate-100">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-2xl font-black uppercase tracking-tighter mb-8">Ready to Architect Your Venture?</h2>
+            <a href="https://wa.me/260761229225" class="bg-blue-600 text-white px-12 py-4 text-[10px] font-black uppercase tracking-widest hover:bg-slate-900 transition-colors">Start a Conversation</a>
+        </div>
+    </footer>
+
+</body>
+</html>
