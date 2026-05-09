@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LoanTrack</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300&family=DM+Mono:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#111827;--paper:#f5f2eb;--card:#ffffff;--accent:#b5390d;--teal:#0f766e;--gold:#b45309;--muted:#6b7280;--border:#e5e0d5;--green-bg:#dcfce7;--green-fg:#166534;--amber-bg:#fef3c7;--amber-fg:#92400e;--red-bg:#fee2e2;--red-fg:#991b1b;--blue-bg:#dbeafe;--blue-fg:#1e40af}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:15px}body{font-family:'Instrument Sans',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+#login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--ink);position:relative;overflow:hidden}
+#login-screen::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(255,255,255,.018) 40px,rgba(255,255,255,.018) 41px)}
+.login-box{background:var(--card);border-radius:16px;padding:2.8rem 2.4rem;width:100%;max-width:400px;position:relative;z-index:1;box-shadow:0 32px 80px rgba(0,0,0,.5)}
+.login-logo{font-family:'Fraunces',serif;font-size:2rem;font-weight:700;color:var(--ink);margin-bottom:.2rem}
+.login-logo span{color:var(--accent)}
+.login-sub{font-size:.78rem;color:var(--muted);letter-spacing:.5px;text-transform:uppercase;margin-bottom:2rem;font-family:'DM Mono',monospace}
+.lf{margin-bottom:1rem}
+.lf label{display:block;font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:.35rem}
+.lf input{width:100%;padding:.65rem .9rem;border:1.5px solid var(--border);border-radius:8px;font-family:'Instrument Sans',sans-serif;font-size:.95rem;outline:none;transition:border-color .2s;background:#fafaf9}
+.lf input:focus{border-color:var(--teal);background:#fff}
+.btn-login{width:100%;padding:.75rem;background:var(--ink);color:#fff;border:none;border-radius:8px;font-family:'Instrument Sans',sans-serif;font-size:.95rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:background .2s,transform .1s}
+.btn-login:hover{background:var(--accent)}.btn-login:active{transform:scale(.98)}
+#login-error{margin-top:.8rem;font-size:.8rem;color:var(--accent);text-align:center;min-height:1.1em;font-family:'DM Mono',monospace}
+.config-link{margin-top:1.2rem;text-align:center;font-size:.74rem;color:var(--muted)}
+.config-link a{color:var(--teal);cursor:pointer;text-decoration:underline}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:500;align-items:center;justify-content:center}
+.modal-overlay.open{display:flex}
+.modal{background:var(--card);border-radius:14px;padding:2rem;width:100%;max-width:520px;box-shadow:0 20px 60px rgba(0,0,0,.3);position:relative}
+.modal-title{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:1.1rem}
+.modal input{width:100%;padding:.6rem .85rem;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Mono',monospace;font-size:.82rem;margin-bottom:.8rem;outline:none;background:#fafaf9}
+.modal input:focus{border-color:var(--teal);background:#fff}
+.modal-note{font-size:.78rem;color:var(--muted);margin-bottom:1rem;line-height:1.6}
+.modal-actions{display:flex;gap:.7rem;justify-content:flex-end;margin-top:.5rem}
+.btn-xm{position:absolute;top:1rem;right:1rem;background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--muted)}
+.btn-xm:hover{color:var(--ink)}
+#app{display:none}#app.visible{display:block}
+header{background:var(--ink);color:#fff;padding:0 2rem;height:60px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;border-bottom:3px solid var(--accent)}
+.h-logo{font-family:'Fraunces',serif;font-size:1.45rem;font-weight:700}.h-logo span{color:var(--accent)}
+.h-right{display:flex;align-items:center;gap:.9rem}
+.user-pill{display:flex;align-items:center;gap:.5rem;background:#1e2d3d;border-radius:20px;padding:4px 12px 4px 4px;font-size:.77rem}
+.ua{width:26px;height:26px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:#fff;text-transform:uppercase}
+.un{color:#e5e7eb;font-weight:500}
+.ur{font-family:'DM Mono',monospace;font-size:.63rem;padding:2px 7px;border-radius:10px}
+.ra{background:rgba(181,57,13,.3);color:#fca5a5}.rs{background:rgba(15,118,110,.3);color:#99f6e4}
+#sync-badge{font-family:'DM Mono',monospace;font-size:.67rem;padding:3px 10px;border-radius:12px;background:#1e2d3d;color:#9ca3af;transition:all .3s}
+#sync-badge.syncing{color:var(--gold)}#sync-badge.ok{color:#4ade80}#sync-badge.error{color:#f87171}
+.btn-logout{background:none;border:1.5px solid rgba(255,255,255,.15);color:#9ca3af;padding:4px 12px;border-radius:6px;font-size:.73rem;cursor:pointer;font-family:'Instrument Sans',sans-serif;transition:all .2s}
+.btn-logout:hover{border-color:var(--accent);color:#fff}
+.tab-bar{background:var(--card);border-bottom:1.5px solid var(--border);padding:0 2rem;display:flex;position:sticky;top:60px;z-index:90}
+.tab{padding:.68rem 1.15rem;font-size:.82rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:var(--muted);border-bottom:3px solid transparent;margin-bottom:-1.5px;transition:all .2s;font-family:'Instrument Sans',sans-serif}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}.tab:hover:not(.active){color:var(--ink)}.tab.gone{display:none}
+.pane{display:none}.pane.active{display:block}
+.container{max-width:1120px;margin:0 auto;padding:2rem 1.5rem}
+.ss{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:1rem;margin-bottom:1.5rem}
+.stat{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1rem 1.2rem;position:relative;overflow:hidden}
+.stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.s-b::after{background:#3b82f6}.s-g::after{background:var(--teal)}.s-a::after{background:var(--gold)}.s-r::after{background:var(--accent)}
+.sl{font-size:.67rem;font-weight:600;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:.3rem}
+.sv{font-family:'DM Mono',monospace;font-size:1.2rem;font-weight:500}.ss2{font-size:.69rem;color:var(--muted);margin-top:.2rem}
+.card{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.4rem;margin-bottom:1.4rem}
+.ct{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:600;margin-bottom:1.1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border)}
+.fg-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem}
+.fg{display:flex;flex-direction:column;gap:.3rem}.fg.full{grid-column:1/-1}
+.fg label{font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--muted)}
+.fg input,.fg select{padding:.52rem .78rem;border:1.5px solid var(--border);border-radius:8px;font-family:'Instrument Sans',sans-serif;font-size:.9rem;color:var(--ink);background:#fafaf9;outline:none;transition:border-color .2s}
+.fg input:focus,.fg select:focus{border-color:var(--teal);background:#fff}
+.fg input[readonly]{background:#f3f4f6;color:var(--muted)}
+.fa{margin-top:1.1rem;display:flex;gap:.7rem;align-items:center;flex-wrap:wrap}
+.btn{padding:.56rem 1.4rem;font-size:.86rem;font-weight:600;font-family:'Instrument Sans',sans-serif;border:none;border-radius:8px;cursor:pointer;transition:all .2s}
+.bp{background:var(--teal);color:#fff}.bp:hover{background:#0a5f58;transform:translateY(-1px)}
+.bg{background:var(--border);color:var(--ink)}.bg:hover{background:#ddd}
+.bd{background:var(--accent);color:#fff}.bd:hover{background:#922e0a}
+.bsm{padding:.38rem .95rem;font-size:.77rem}
+.tw{overflow-x:auto;border-radius:10px;border:1.5px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:.83rem}
+thead tr{background:var(--ink)}
+thead th{padding:.62rem 1rem;text-align:left;font-size:.68rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#e5e7eb;white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border);transition:background .12s}
+tbody tr:last-child{border-bottom:none}tbody tr:hover{background:#faf8f4}
+tbody td{padding:.58rem 1rem;vertical-align:middle}
+.mono{font-family:'DM Mono',monospace;font-size:.79rem}
+.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.67rem;font-weight:600}
+.b-paid{background:var(--green-bg);color:var(--green-fg)}.b-active{background:var(--amber-bg);color:var(--amber-fg)}
+.b-admin{background:var(--red-bg);color:var(--red-fg)}.b-staff{background:var(--blue-bg);color:var(--blue-fg)}
+.bz{color:var(--green-fg);font-weight:600}.bp2{color:var(--amber-fg);font-weight:600}
+.dbtn{background:var(--red-bg);color:var(--red-fg);border:none;border-radius:6px;padding:2px 9px;font-size:.7rem;cursor:pointer;transition:background .15s}
+.dbtn:hover{background:#fca5a5}
+.sr{display:flex;gap:.8rem;margin-bottom:1rem;align-items:center;flex-wrap:wrap}
+.sr input{flex:1;min-width:180px;padding:.48rem .88rem;border:1.5px solid var(--border);border-radius:8px;font-family:'Instrument Sans',sans-serif;font-size:.87rem;outline:none;background:#fafaf9}
+.sr input:focus{border-color:var(--teal);background:#fff}
+.bcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:1rem}
+.bc{background:var(--card);border:1.5px solid var(--border);border-radius:12px;padding:1.2rem;transition:box-shadow .2s}
+.bc:hover{box-shadow:0 4px 20px rgba(0,0,0,.08)}
+.bch{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.8rem}
+.bcn{font-family:'Fraunces',serif;font-size:1rem;font-weight:600}
+.bcf{font-family:'DM Mono',monospace;font-size:.69rem;color:var(--muted);margin-top:.1rem}
+.bcs{display:grid;grid-template-columns:1fr 1fr;gap:.32rem .8rem;font-size:.78rem}
+.bck{color:var(--muted)}.bcv{font-family:'DM Mono',monospace;font-weight:500;text-align:right}
+.pw{margin-top:.8rem;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pb{height:100%;border-radius:3px;transition:width .5s ease}
+.ul{display:flex;flex-direction:column;gap:.6rem}
+.ur2{display:flex;align-items:center;justify-content:space-between;padding:.68rem 1rem;background:#fafaf9;border:1.5px solid var(--border);border-radius:8px}
+.ui{display:flex;align-items:center;gap:.7rem}
+.bs-sec{background:var(--card);border:1.5px solid var(--border);border-radius:10px;margin-bottom:1rem;overflow:hidden}
+.bs-hd{background:var(--ink);color:#fff;padding:.58rem 1rem;font-size:.73rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.bs-r{display:flex;justify-content:space-between;align-items:center;padding:.58rem 1rem;border-bottom:1px solid var(--border);font-size:.87rem}
+.bs-r:last-child{border-bottom:none}
+.bs-r.tot{background:#f5f2eb;font-weight:700;font-size:.93rem;border-top:2px solid var(--border)}
+.bs-r.hi{background:var(--ink);color:#fff;font-weight:700;font-size:.98rem;border-radius:0 0 10px 10px}
+.bsv{font-family:'DM Mono',monospace;font-weight:500}
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted);font-size:.87rem}
+.ei{font-size:2rem;margin-bottom:.4rem}
+#toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--ink);color:#fff;padding:.68rem 1.2rem;border-radius:10px;font-size:.8rem;font-family:'DM Mono',monospace;opacity:0;transform:translateY(8px);transition:all .28s;z-index:999;pointer-events:none;max-width:300px}
+#toast.show{opacity:1;transform:translateY(0)}#toast.ok{border-left:4px solid #4ade80}#toast.err{border-left:4px solid #f87171}
+@media(max-width:600px){header,.tab-bar{padding:0 1rem}.container{padding:1rem}.fg-grid{grid-template-columns:1fr}.h-logo{font-size:1.2rem}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Loan<span>Track</span></div>
+    <div class="login-sub">Loan Management System</div>
+    <div class="lf"><label>Username</label><input type="text" id="li-u" placeholder="Enter username" autocomplete="username"/></div>
+    <div class="lf"><label>Password</label><input type="password" id="li-p" placeholder="Enter password" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/></div>
+    <button class="btn-login" onclick="doLogin()">Sign In</button>
+    <div id="login-error"></div>
+    <div class="config-link">First time? <a onclick="openCfg()">Configure Google Sheet connection</a></div>
+  </div>
+</div>
+
+<!-- CONFIG MODAL -->
+<div class="modal-overlay" id="cfg-modal">
+  <div class="modal">
+    <button class="btn-xm" onclick="closeCfg()">✕</button>
+    <div class="modal-title">Google Sheet Connection</div>
+    <p class="modal-note">Paste your Apps Script Web App URL. See the Setup Guide tab after logging in for instructions.</p>
+    <input type="text" id="cfg-url" placeholder="https://script.google.com/macros/s/YOUR_ID/exec"/>
+    <div class="modal-actions">
+      <button class="btn bg bsm" onclick="closeCfg()">Cancel</button>
+      <button class="btn bp bsm" onclick="saveCfg()">Save &amp; Connect</button>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header>
+    <div class="h-logo">Loan<span>Track</span></div>
+    <div class="h-right">
+      <div id="sync-badge">● —</div>
+      <div class="user-pill">
+        <div class="ua" id="u-av">?</div>
+        <span class="un" id="u-nm">—</span>
+        <span class="ur" id="u-rb">—</span>
+      </div>
+      <button class="btn-logout" onclick="doLogout()">Sign out</button>
+    </div>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab active" onclick="sw('dashboard',this)">Dashboard</button>
+    <button class="tab" onclick="sw('entry',this)">New Entry</button>
+    <button class="tab" onclick="sw('records',this)">Records</button>
+    <button class="tab" onclick="sw('borrowers',this)">Borrowers</button>
+    <button class="tab" onclick="sw('balance',this)">Balance Sheet</button>
+    <button class="tab admin-only gone" onclick="sw('users',this)">Team</button>
+    <button class="tab" onclick="sw('guide',this)">Setup Guide</button>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div id="pane-dashboard" class="pane active">
+    <div class="container">
+      <div class="ss">
+        <div class="stat s-b"><div class="sl">Total Loaned</div><div class="sv" id="s-l">ZMW 0</div><div class="ss2" id="s-b">0 borrowers</div></div>
+        <div class="stat s-g"><div class="sl">Collected</div><div class="sv" id="s-c">ZMW 0</div><div class="ss2" id="s-p">0%</div></div>
+        <div class="stat s-a"><div class="sl">Outstanding</div><div class="sv" id="s-o">ZMW 0</div><div class="ss2" id="s-ac">0 active</div></div>
+        <div class="stat s-r"><div class="sl">Cash In Hand</div><div class="sv" id="s-h">ZMW 0</div><div class="ss2">Repayments received</div></div>
+      </div>
+      <div class="card">
+        <div class="ct">Recent Repayments</div>
+        <div class="tw"><table>
+          <thead><tr><th>File</th><th>Date</th><th>Name</th><th>Due</th><th>Paid</th><th>Balance</th><th>Status</th><th>By</th></tr></thead>
+          <tbody id="tb-r"><tr><td colspan="8"><div class="empty"><div class="ei">📋</div>No data yet.</div></td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ENTRY -->
+  <div id="pane-entry" class="pane">
+    <div class="container">
+      <div class="card">
+        <div class="ct">Record a Repayment</div>
+        <div class="fg-grid">
+          <div class="fg"><label>File Number *</label><input type="text" id="e-f" placeholder="001"/></div>
+          <div class="fg"><label>Date *</label><input type="date" id="e-d"/></div>
+          <div class="fg"><label>Borrower Name *</label><input type="text" id="e-n" placeholder="Full name" list="bl"/><datalist id="bl"></datalist></div>
+          <div class="fg"><label>Amount Due (ZMW) *</label><input type="number" id="e-due" placeholder="0.00" step="0.01" min="0" oninput="calcB()"/></div>
+          <div class="fg"><label>Amount Paid (ZMW) *</label><input type="number" id="e-paid" placeholder="0.00" step="0.01" min="0" oninput="calcB()"/></div>
+          <div class="fg"><label>Balance (ZMW)</label><input type="number" id="e-bal" readonly/></div>
+        </div>
+        <div class="fa">
+          <button class="btn bp" onclick="submitR()">Save to Google Sheet</button>
+          <button class="btn bg" onclick="clrE()">Clear</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ct">Register New Loan</div>
+        <div class="fg-grid">
+          <div class="fg"><label>File Number *</label><input type="text" id="n-f" placeholder="006"/></div>
+          <div class="fg"><label>Date Issued *</label><input type="date" id="n-d"/></div>
+          <div class="fg"><label>Borrower Name *</label><input type="text" id="n-n" placeholder="Full name"/></div>
+          <div class="fg"><label>Principal (ZMW) *</label><input type="number" id="n-pr" placeholder="0.00" step="0.01"/></div>
+          <div class="fg"><label>Daily Instalment (ZMW)</label><input type="number" id="n-in" placeholder="0.00" step="0.01"/></div>
+        </div>
+        <div class="fa"><button class="btn bp" onclick="regLoan()">Create &amp; Pre-fill</button></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RECORDS -->
+  <div id="pane-records" class="pane">
+    <div class="container">
+      <div class="sr">
+        <input type="text" id="rec-s" placeholder="Search name or file number…" oninput="filterR()"/>
+        <button class="btn bp bsm" onclick="loadSheet()">↻ Refresh</button>
+      </div>
+      <div class="card" style="padding:0">
+        <div class="tw"><table>
+          <thead><tr><th>File</th><th>Date</th><th>Name</th><th>Due</th><th>Paid</th><th>Balance</th><th>Status</th><th>By</th><th class="admin-only" id="del-col">Del</th></tr></thead>
+          <tbody id="tb-rec"><tr><td colspan="9"><div class="empty"><div class="ei">🔎</div>Connect your Sheet and refresh.</div></td></tr></tbody>
+        </table></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BORROWERS -->
+  <div id="pane-borrowers" class="pane">
+    <div class="container">
+      <div id="bc-g" class="bcg"><div class="empty" style="grid-column:1/-1"><div class="ei">👤</div>Load records first.</div></div>
+    </div>
+  </div>
+
+  <!-- BALANCE SHEET -->
+  <div id="pane-balance" class="pane">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:.6rem">
+        <h2 style="font-family:'Fraunces',serif;font-size:1.25rem">Cash Balance Sheet</h2>
+        <div style="display:flex;align-items:center;gap:.6rem">
+          <label style="font-size:.77rem;color:var(--muted)">Capital deposited (ZMW)</label>
+          <input type="number" id="bs-cap" value="0" step="0.01" oninput="renderBS()"
+            style="width:130px;padding:.4rem .7rem;border:1.5px solid var(--border);border-radius:7px;font-family:'DM Mono',monospace;font-size:.84rem;outline:none;background:#fafaf9"
+            onfocus="this.style.borderColor='var(--teal)'" onblur="this.style.borderColor='var(--border)'"/>
+          <button class="btn bg bsm" onclick="renderBS()">Recalculate</button>
+        </div>
+      </div>
+      <div id="bs-body"></div>
+    </div>
+  </div>
+
+  <!-- TEAM (admin only) -->
+  <div id="pane-users" class="pane">
+    <div class="container">
+      <div class="card">
+        <div class="ct">Team Members</div>
+        <div id="u-list" class="ul"></div>
+        <div style="margin-top:1.3rem;padding-top:1rem;border-top:1px solid var(--border)">
+          <div style="font-family:'Fraunces',serif;font-size:.95rem;margin-bottom:.8rem">Add Team Member</div>
+          <div class="fg-grid">
+            <div class="fg"><label>Username</label><input type="text" id="nu-u" placeholder="e.g. grace"/></div>
+            <div class="fg"><label>Password</label><input type="password" id="nu-p" placeholder="••••••"/></div>
+            <div class="fg"><label>Role</label><select id="nu-r"><option value="staff">Staff</option><option value="admin">Admin</option></select></div>
+          </div>
+          <div class="fa"><button class="btn bp" onclick="addUser()">Add Member</button></div>
+        </div>
+      </div>
+      <div class="card" style="background:var(--amber-bg);border-color:var(--gold)">
+        <p style="font-size:.81rem;color:var(--amber-fg);line-height:1.7">⚠️ <strong>Security note:</strong> Credentials are stored in localStorage and your Google Sheet. Suitable for a small trusted team. For sensitive data, consider a proper backend auth system.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GUIDE -->
+  <div id="pane-guide" class="pane">
+    <div class="container">
+      <div class="card">
+        <div class="ct">📄 Google Sheets Setup Guide</div>
+        <div style="line-height:1.9;font-size:.87rem;color:#374151">
+          <p><strong>Step 1 — Create your Google Sheet</strong></p>
+          <p>Go to <a href="https://sheets.google.com" target="_blank" style="color:var(--teal)">sheets.google.com</a>, create a spreadsheet named <em>LoanTrack</em>. Rename Sheet1 to <strong>Repayments</strong>, add a second sheet named <strong>Users</strong>.</p><br>
+          <p><strong>Repayments</strong> headers (Row 1):</p>
+          <pre style="background:#f5f5f4;padding:.75rem 1rem;border-radius:8px;font-family:'DM Mono',monospace;font-size:.76rem;overflow-x:auto;margin:.5rem 0">File Number | Date | Name | Amount Due | Amount Paid | Balance | Entered By | Timestamp</pre>
+          <p><strong>Users</strong> headers (Row 1):</p>
+          <pre style="background:#f5f5f4;padding:.75rem 1rem;border-radius:8px;font-family:'DM Mono',monospace;font-size:.76rem;overflow-x:auto;margin:.5rem 0">username | password | role</pre>
+          <p>Add your team in rows below. Roles: <code style="background:#f5f5f4;padding:1px 5px;border-radius:4px">admin</code> or <code style="background:#f5f5f4;padding:1px 5px;border-radius:4px">staff</code>.</p><br>
+          <p><strong>Step 2 — Apps Script</strong></p>
+          <p>Go to <strong>Extensions → Apps Script</strong>, delete existing code, paste:</p>
+          <pre style="background:#0f1923;color:#e2e8f0;padding:1.1rem;border-radius:8px;font-family:'DM Mono',monospace;font-size:.74rem;overflow-x:auto;line-height:1.75;margin:.5rem 0">const SS = SpreadsheetApp.getActiveSpreadsheet();
+
+function doGet(e) {
+  const action = e.parameter.action;
+
+  if (action === 'login') {
+    const rows = SS.getSheetByName('Users').getDataRange().getValues().slice(1);
+    const user = rows.find(r =>
+      String(r[0]).toLowerCase() === String(e.parameter.username).toLowerCase() &&
+      String(r[1]) === String(e.parameter.password)
+    );
+    return user
+      ? json({ status:'ok', role:user[2], username:user[0] })
+      : json({ status:'error', message:'Invalid credentials' });
+  }
+
+  if (action === 'getRecords') {
+    const sh = SS.getSheetByName('Repayments');
+    const data = sh.getDataRange().getValues();
+    const headers = data[0];
+    const rows = data.slice(1).filter(r => r[0] !== '').map(r => {
+      const obj = {};
+      headers.forEach((h,i) => obj[h] = r[i]);
+      return obj;
+    });
+    return json({ status:'ok', data:rows });
+  }
+
+  if (action === 'getUsers') {
+    const rows = SS.getSheetByName('Users').getDataRange().getValues().slice(1)
+      .filter(r => r[0]).map(r => ({ username:r[0], role:r[2] }));
+    return json({ status:'ok', users:rows });
+  }
+  return json({ status:'error', message:'Unknown action' });
+}
+
+function doPost(e) {
+  const p = JSON.parse(e.postData.contents);
+
+  if (p.action === 'append') {
+    SS.getSheetByName('Repayments').appendRow([
+      p.fileNo, p.date, p.name,
+      p.amountDue, p.amountPaid, p.balance,
+      p.enteredBy, new Date().toISOString()
+    ]);
+    return json({ status:'ok' });
+  }
+
+  if (p.action === 'deleteRow') {
+    const sh = SS.getSheetByName('Repayments');
+    const data = sh.getDataRange().getValues();
+    for (let i = data.length - 1; i >= 1; i--) {
+      if (String(data[i][0])===String(p.fileNo) &&
+          String(data[i][1])===String(p.date) &&
+          String(data[i][2])===String(p.name)) {
+        sh.deleteRow(i + 1);
+        return json({ status:'ok' });
+      }
+    }
+    return json({ status:'error', message:'Row not found' });
+  }
+
+  if (p.action === 'addUser') {
+    SS.getSheetByName('Users').appendRow([p.username, p.password, p.role]);
+    return json({ status:'ok' });
+  }
+  return json({ status:'error', message:'Unknown action' });
+}
+
+function json(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre><br>
+          <p><strong>Step 3 — Deploy</strong></p>
+          <ol style="padding-left:1.4rem;line-height:2.2">
+            <li>Click <strong>Deploy → New deployment</strong></li>
+            <li>Type: <strong>Web app</strong></li>
+            <li>Execute as: <strong>Me</strong></li>
+            <li>Who has access: <strong>Anyone</strong></li>
+            <li>Click <strong>Deploy</strong> → copy the URL</li>
+          </ol><br>
+          <p><strong>Step 4 — Connect &amp; Deploy to Azure</strong></p>
+          <p>On the login screen click <em>"Configure Google Sheet connection"</em> and paste the URL. Then drop <code style="background:#f5f5f4;padding:1px 5px;border-radius:4px">loan-app.html</code> into your Azure Static Web App. Done.</p><br>
+          <div style="background:var(--amber-bg);border-left:3px solid var(--gold);padding:.65rem 1rem;border-radius:0 8px 8px 0;font-size:.8rem">
+            ⚠️ After any code change in Apps Script, always create a <strong>new deployment</strong> — editing an existing one won't update the live URL.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /app -->
+<div id="toast"></div>
+
+<script>
+let SURL = localStorage.getItem('lt_url')||'';
+let SES  = JSON.parse(sessionStorage.getItem('lt_ses')||'null');
+let recs = JSON.parse(localStorage.getItem('lt_recs')||'[]');
+let lUsers= JSON.parse(localStorage.getItem('lt_usr')||JSON.stringify([
+  {username:'admin',password:'admin123',role:'admin'},
+  {username:'staff',password:'staff123',role:'staff'}
+]));
+
+window.addEventListener('DOMContentLoaded',()=>{
+  if(SURL) document.getElementById('cfg-url').value=SURL;
+  if(SES) bootApp();
+  const t=new Date().toISOString().split('T')[0];
+  document.getElementById('e-d').value=t;
+  document.getElementById('n-d').value=t;
+});
+
+function openCfg(){document.getElementById('cfg-modal').classList.add('open')}
+function closeCfg(){document.getElementById('cfg-modal').classList.remove('open')}
+function saveCfg(){
+  const u=document.getElementById('cfg-url').value.trim();
+  if(!u){toast('Paste your Apps Script URL','err');return}
+  SURL=u;localStorage.setItem('lt_url',u);closeCfg();toast('Sheet URL saved ✓','ok');
+}
+
+function doLogin(){
+  const u=document.getElementById('li-u').value.trim();
+  const p=document.getElementById('li-p').value;
+  if(!u||!p){setLE('Enter username and password');return}
+  if(SURL){
+    setSB('syncing','⟳ Signing in…');
+    fetch(`${SURL}?action=login&username=${encodeURIComponent(u)}&password=${encodeURIComponent(p)}`)
+      .then(r=>r.json()).then(d=>{
+        if(d.status==='ok'){setSB('ok','● Connected');startSes({username:d.username,role:d.role})}
+        else{setSB('error','● Error');setLE('Invalid username or password')}
+      }).catch(()=>localLogin(u,p));
+  } else localLogin(u,p);
+}
+
+function localLogin(u,p){
+  const f=lUsers.find(x=>x.username.toLowerCase()===u.toLowerCase()&&x.password===p);
+  if(f) startSes({username:f.username,role:f.role});
+  else setLE('Invalid username or password');
+}
+
+function setLE(m){
+  document.getElementById('login-error').textContent=m;
+  setTimeout(()=>document.getElementById('login-error').textContent='',3000);
+}
+
+function startSes(s){
+  SES=s;sessionStorage.setItem('lt_ses',JSON.stringify(s));bootApp();
+}
+
+function doLogout(){
+  SES=null;sessionStorage.removeItem('lt_ses');
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-screen').style.display='flex';
+  document.getElementById('li-u').value='';
+  document.getElementById('li-p').value='';
+}
+
+function bootApp(){
+  document.getElementById('login-screen').style.display='none';
+  document.getElementById('app').classList.add('visible');
+  document.getElementById('u-av').textContent=SES.username.charAt(0);
+  document.getElementById('u-nm').textContent=SES.username;
+  const rb=document.getElementById('u-rb');
+  rb.textContent=SES.role;rb.className='ur '+(SES.role==='admin'?'ra':'rs');
+  document.querySelectorAll('.admin-only').forEach(el=>el.classList.toggle('gone',SES.role!=='admin'));
+  renderAll();
+  if(SURL) loadSheet();
+}
+
+function sw(name,btn){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pane-'+name).classList.add('active');btn.classList.add('active');
+  if(name==='borrowers') renderBC();
+  if(name==='balance')   renderBS();
+  if(name==='users')     renderUL();
+}
+
+function loadSheet(){
+  if(!SURL){toast('Configure Sheet URL first','err');return}
+  setSB('syncing','⟳ Syncing…');
+  fetch(`${SURL}?action=getRecords`)
+    .then(r=>r.json()).then(d=>{
+      if(d.status==='ok'){
+        recs=d.data.map(r=>({
+          fileNo:String(r['File Number']||''),date:String(r['Date']||''),
+          name:String(r['Name']||''),amountDue:parseFloat(r['Amount Due'])||0,
+          amountPaid:parseFloat(r['Amount Paid'])||0,balance:parseFloat(r['Balance'])||0,
+          enteredBy:String(r['Entered By']||'')
+        })).filter(r=>r.name);
+        localStorage.setItem('lt_recs',JSON.stringify(recs));
+        setSB('ok','● Synced');renderAll();toast(`Loaded ${recs.length} records`,'ok');
+      }
+    }).catch(()=>{setSB('error','● Offline');toast('Using cached data','err')});
+}
+
+function submitR(){
+  const fileNo=document.getElementById('e-f').value.trim();
+  const date=document.getElementById('e-d').value;
+  const name=document.getElementById('e-n').value.trim().toUpperCase();
+  const amountDue=parseFloat(document.getElementById('e-due').value)||0;
+  const amountPaid=parseFloat(document.getElementById('e-paid').value)||0;
+  const balance=amountDue-amountPaid;
+  if(!fileNo||!date||!name||!amountDue){toast('Fill in all required fields','err');return}
+  const rec={fileNo,date,name,amountDue,amountPaid,balance,enteredBy:SES.username};
+  recs.push(rec);localStorage.setItem('lt_recs',JSON.stringify(recs));
+  renderAll();toast('Saved locally ✓','ok');clrE();
+  if(SURL){
+    setSB('syncing','⟳ Saving…');
+    fetch(SURL,{method:'POST',body:JSON.stringify({action:'append',...rec})})
+      .then(r=>r.json()).then(d=>{
+        if(d.status==='ok'){setSB('ok','● Synced');toast('Saved to Sheet ✓','ok')}
+        else setSB('error','● Error');
+      }).catch(()=>setSB('error','● Unreachable'));
+  }
+}
+
+function delRec(fileNo,date,name){
+  if(SES.role!=='admin'){toast('Admin only','err');return}
+  if(!confirm(`Delete record for ${name} on ${date}?`)) return;
+  recs=recs.filter(r=>!(r.fileNo===fileNo&&r.date===date&&r.name===name));
+  localStorage.setItem('lt_recs',JSON.stringify(recs));renderAll();toast('Deleted','ok');
+  if(SURL) fetch(SURL,{method:'POST',body:JSON.stringify({action:'deleteRow',fileNo,date,name})}).catch(()=>{});
+}
+
+function regLoan(){
+  const f=document.getElementById('n-f').value.trim();
+  const d=document.getElementById('n-d').value;
+  const n=document.getElementById('n-n').value.trim().toUpperCase();
+  const pr=parseFloat(document.getElementById('n-pr').value)||0;
+  const ins=parseFloat(document.getElementById('n-in').value)||0;
+  if(!f||!d||!n||!pr){toast('Fill required fields','err');return}
+  document.getElementById('e-f').value=f;document.getElementById('e-d').value=d;
+  document.getElementById('e-n').value=n;document.getElementById('e-due').value=pr.toFixed(2);
+  document.getElementById('e-paid').value=ins?ins.toFixed(2):'';calcB();
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('pane-entry').classList.add('active');
+  document.querySelectorAll('.tab')[1].classList.add('active');
+  toast('Pre-filled — review and save','ok');
+}
+
+function renderUL(){
+  const w=document.getElementById('u-list');
+  if(!lUsers.length){w.innerHTML='<p style="color:var(--muted);font-size:.84rem">No users.</p>';return}
+  w.innerHTML=lUsers.map((u,i)=>`
+    <div class="ur2">
+      <div class="ui">
+        <div class="ua" style="width:30px;height:30px;font-size:.78rem">${u.username.charAt(0)}</div>
+        <div><div style="font-weight:600;font-size:.88rem">${u.username}</div>
+        <div style="font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace">${u.role}</div></div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.6rem">
+        <span class="badge ${u.role==='admin'?'b-admin':'b-staff'}">${u.role}</span>
+        ${u.username!==SES.username?`<button class="dbtn" onclick="remUser(${i})">Remove</button>`:'<span style="font-size:.7rem;color:var(--muted)">You</span>'}
+      </div>
+    </div>`).join('');
+}
+
+function addUser(){
+  const u=document.getElementById('nu-u').value.trim().toLowerCase();
+  const p=document.getElementById('nu-p').value;
+  const r=document.getElementById('nu-r').value;
+  if(!u||!p){toast('Fill username and password','err');return}
+  if(lUsers.find(x=>x.username===u)){toast('Username exists','err');return}
+  lUsers.push({username:u,password:p,role:r});
+  localStorage.setItem('lt_usr',JSON.stringify(lUsers));
+  document.getElementById('nu-u').value='';document.getElementById('nu-p').value='';
+  renderUL();toast(`${u} added ✓`,'ok');
+  if(SURL) fetch(SURL,{method:'POST',body:JSON.stringify({action:'addUser',username:u,password:p,role:r})}).catch(()=>{});
+}
+
+function remUser(i){
+  if(!confirm(`Remove ${lUsers[i].username}?`)) return;
+  lUsers.splice(i,1);localStorage.setItem('lt_usr',JSON.stringify(lUsers));
+  renderUL();toast('User removed','ok');
+}
+
+function renderAll(){renderStats();renderRecent();renderRecT(recs);updDL()}
+
+const zmw=n=>'ZMW '+Number(n).toLocaleString('en-ZM',{minimumFractionDigits:2,maximumFractionDigits:2});
+
+function renderStats(){
+  const due=recs.reduce((s,r)=>s+r.amountDue,0);
+  const col=recs.reduce((s,r)=>s+r.amountPaid,0);
+  const out=recs.filter(r=>r.balance>0).reduce((s,r)=>s+r.balance,0);
+  const uniq=new Set(recs.map(r=>r.name)).size;
+  const act=new Set(recs.filter(r=>r.balance>0).map(r=>r.name)).size;
+  const pct=due>0?((col/due)*100).toFixed(1):'0.0';
+  document.getElementById('s-l').textContent=zmw(due);
+  document.getElementById('s-b').textContent=uniq+' borrowers';
+  document.getElementById('s-c').textContent=zmw(col);
+  document.getElementById('s-p').textContent=pct+'% collected';
+  document.getElementById('s-o').textContent=zmw(out);
+  document.getElementById('s-ac').textContent=act+' active';
+  document.getElementById('s-h').textContent=zmw(col);
+}
+
+function rHTML(r,del){
+  const b=parseFloat(r.balance)||0;
+  const bc=b===0?'bz':'bp2';
+  const bg=b===0?'<span class="badge b-paid">Paid</span>':'<span class="badge b-active">Active</span>';
+  const dt=del?`<td><button class="dbtn" onclick="delRec('${r.fileNo}','${r.date}','${r.name.replace(/'/g,"\\'")}')">✕</button></td>`:'<td></td>';
+  return `<tr><td class="mono">${r.fileNo||'—'}</td><td>${r.date||'—'}</td><td><strong>${r.name||'—'}</strong></td>
+    <td class="mono">${zmw(r.amountDue)}</td><td class="mono">${zmw(r.amountPaid)}</td>
+    <td class="mono ${bc}">${zmw(b)}</td><td>${bg}</td>
+    <td style="font-size:.7rem;color:var(--muted);font-family:'DM Mono',monospace">${r.enteredBy||'—'}</td>${dt}</tr>`;
+}
+
+function renderRecent(){
+  const tb=document.getElementById('tb-r');
+  const r=[...recs].reverse().slice(0,8);
+  tb.innerHTML=r.length?r.map(x=>rHTML(x,false)).join(''):'<tr><td colspan="8"><div class="empty"><div class="ei">📋</div>No data yet.</div></td></tr>';
+}
+
+function renderRecT(r){
+  const tb=document.getElementById('tb-rec');
+  const ia=SES?.role==='admin';
+  document.getElementById('del-col').classList.toggle('gone',!ia);
+  tb.innerHTML=r.length?r.map(x=>rHTML(x,ia)).join(''):'<tr><td colspan="9"><div class="empty"><div class="ei">🔎</div>No records.</div></td></tr>';
+}
+
+function filterR(){
+  const q=document.getElementById('rec-s').value.toLowerCase();
+  renderRecT(recs.filter(r=>r.name.toLowerCase().includes(q)||r.fileNo.toLowerCase().includes(q)));
+}
+
+function renderBC(){
+  const g=document.getElementById('bc-g');
+  if(!recs.length){g.innerHTML='<div class="empty" style="grid-column:1/-1"><div class="ei">👤</div>Load records first.</div>';return}
+  const map={};
+  recs.forEach(r=>{if(!map[r.name])map[r.name]={fileNo:r.fileNo,rows:[]};map[r.name].rows.push(r)});
+  g.innerHTML=Object.entries(map).map(([name,d])=>{
+    const pr=Math.max(...d.rows.map(r=>r.amountDue));
+    const col=d.rows.reduce((s,r)=>s+r.amountPaid,0);
+    const bal=d.rows[d.rows.length-1]?.balance??0;
+    const pct=pr>0?Math.min(100,(col/pr)*100):0;
+    const paid=bal===0;
+    return `<div class="bc">
+      <div class="bch"><div><div class="bcn">${name}</div><div class="bcf">File #${d.fileNo||'—'} · ${d.rows.length} payments</div></div>
+      <span class="badge ${paid?'b-paid':'b-active'}">${paid?'Paid':'Active'}</span></div>
+      <div class="bcs">
+        <span class="bck">Principal</span><span class="bcv">${zmw(pr)}</span>
+        <span class="bck">Collected</span><span class="bcv">${zmw(col)}</span>
+        <span class="bck">Balance</span><span class="bcv" style="color:${paid?'var(--green-fg)':'var(--amber-fg)'}">${zmw(bal)}</span>
+        <span class="bck">Progress</span><span class="bcv">${pct.toFixed(0)}%</span>
+      </div>
+      <div class="pw"><div class="pb" style="width:${pct}%;background:${paid?'var(--teal)':'var(--gold)'}"></div></div>
+    </div>`;
+  }).join('');
+}
+
+function renderBS(){
+  const cap=parseFloat(document.getElementById('bs-cap').value)||0;
+  const due=recs.reduce((s,r)=>s+r.amountDue,0);
+  const col=recs.reduce((s,r)=>s+r.amountPaid,0);
+  const out=recs.filter(r=>r.balance>0).reduce((s,r)=>s+r.balance,0);
+  const cash=cap+col;const net=cash+out;
+  document.getElementById('bs-body').innerHTML=`
+    <div class="bs-sec"><div class="bs-hd">Capital &amp; Inflows</div>
+      <div class="bs-r"><span>Capital Deposited</span><span class="bsv">${zmw(cap)}</span></div>
+      <div class="bs-r"><span>Total Repayments Collected</span><span class="bsv">${zmw(col)}</span></div>
+      <div class="bs-r tot"><span>Total Inflows</span><span class="bsv">${zmw(cap+col)}</span></div></div>
+    <div class="bs-sec"><div class="bs-hd">Loan Book</div>
+      <div class="bs-r"><span>Total Loan Principals</span><span class="bsv">${zmw(due)}</span></div>
+      <div class="bs-r"><span>Total Collected</span><span class="bsv">${zmw(col)}</span></div>
+      <div class="bs-r"><span>Total Outstanding (owed)</span><span class="bsv" style="color:var(--amber-fg)">${zmw(out)}</span></div></div>
+    <div class="bs-sec"><div class="bs-hd">Cash Position</div>
+      <div class="bs-r"><span>Cash In Hand (Capital + Collected)</span><span class="bsv">${zmw(cash)}</span></div>
+      <div class="bs-r"><span>Funds Outstanding</span><span class="bsv">${zmw(out)}</span></div>
+      <div class="bs-r hi"><span>Net Available Balance</span><span class="bsv">${zmw(net)}</span></div></div>`;
+}
+
+function calcB(){
+  const d=parseFloat(document.getElementById('e-due').value)||0;
+  const p=parseFloat(document.getElementById('e-paid').value)||0;
+  document.getElementById('e-bal').value=(d-p).toFixed(2);
+}
+
+function clrE(){
+  ['e-f','e-n','e-due','e-paid','e-bal'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('e-d').value=new Date().toISOString().split('T')[0];
+}
+
+function updDL(){
+  const ns=[...new Set(recs.map(r=>r.name))];
+  document.getElementById('bl').innerHTML=ns.map(n=>`<option value="${n}">`).join('');
+}
+
+function setSB(cls,txt){const e=document.getElementById('sync-badge');e.className=cls;e.textContent=txt}
+
+let _tt;
+function toast(msg,type='ok'){
+  const e=document.getElementById('toast');e.textContent=msg;e.className='show '+type;
+  clearTimeout(_tt);_tt=setTimeout(()=>{e.className=''},3000);
+}
+</script>
+</body>
+</html>
